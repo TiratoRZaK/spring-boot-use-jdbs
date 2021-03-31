@@ -1,13 +1,23 @@
 package com.luxoft.training.springbootusejdbs;
 
+import com.luxoft.training.springbootusejdbs.dao.CountryDao;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 public class SpringBootUseJdbsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootUseJdbsApplication.class, args);
-	}
+		ApplicationContext context = SpringApplication.run(SpringBootUseJdbsApplication.class, args);
 
+		CountryDao countryDao = context.getBean(CountryDao.class);
+		System.out.println(countryDao.getCountryList());
+
+		System.out.println(countryDao.getCountryByCodeName("RU"));
+
+		countryDao.updateCountryName("RU", "RUSSIA");
+
+		System.out.println(countryDao.getCountryByCodeName("RU"));
+	}
 }
